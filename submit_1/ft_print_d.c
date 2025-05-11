@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_d.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shmiyosh <shmiyosh@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-05-11 12:58:04 by shmiyosh          #+#    #+#             */
+/*   Updated: 2025-05-11 12:58:04 by shmiyosh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+void	ft_putchr(char *array)
+{
+	while (*array)
+		write(1, array++, 1);
+}
+
+int	ft_putnbr(int nbr)
+{
+	int		count;
+	char	*array;
+
+	count = 0;
+	if (nbr == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return (11);
+	}
+	else if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr *= -1;
+	}
+	while (nbr >= 10)
+	{
+		ft_putnbr(nbr / 10);
+	}
+	array[count] = nbr % 10 + '0';
+	ft_putchr(array);
+	return (count);
+}
+
+int	ft_printf_d(va_list args)
+{
+	int	num;
+	int	count;
+
+	num = va_arg(args, int);
+	count = ft_putnbr(num);
+	return (count);
+}

@@ -14,4 +14,17 @@
 
 int	ft_print_p(va_list args)
 {
+	int				count;
+	void			*array;
+	unsigned char	*c;
+
+	count = 0;
+	array = va_arg(args, void *);
+	c = array;
+	while (c[count])
+	{
+		write(1, &c[count], 1);
+		count++;
+	}
+	return (count);
 }
