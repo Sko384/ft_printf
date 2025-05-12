@@ -21,5 +21,6 @@ int	ft_printf(const char *, ...);
 int	ft_print_p(va_list args);
 int	ft_print_d(va_list args);
 int	ft_print_u(va_list args);
+int	ft_print_x(va_list args);
 
 #endif
