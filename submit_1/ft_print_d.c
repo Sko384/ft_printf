@@ -11,17 +11,11 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_putchr(char *array)
-{
-	while (*array)
-		write(1, array++, 1);
-}
+#include <stdio.h>
 
 int	ft_putnbr(int nbr)
 {
-	int		count;
-	char	*array;
+	int	count;
 
 	count = 0;
 	if (nbr == -2147483648)
@@ -32,18 +26,18 @@ int	ft_putnbr(int nbr)
 	else if (nbr < 0)
 	{
 		write(1, "-", 1);
+		count++;
 		nbr *= -1;
 	}
-	while (nbr >= 10)
-	{
-		ft_putnbr(nbr / 10);
-	}
-	array[count] = nbr % 10 + '0';
-	ft_putchr(array);
+	if (nbr >= 10)
+		count += ft_putnbr(nbr / 10);
+	nbr = nbr % 10 + '0';
+	write(1, &nbr, 1);
+	count++;
 	return (count);
 }
 
-int	ft_printf_d(va_list args)
+int	ft_print_d(va_list args)
 {
 	int	num;
 	int	count;
