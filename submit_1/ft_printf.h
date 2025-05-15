@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+# define FT_PRINTF_H
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
+# include <stdarg.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 int	ft_printf(const char *format, ...);
 int	ft_print_p(va_list args);

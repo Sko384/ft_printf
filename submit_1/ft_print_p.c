@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include <stdint.h>
 
-int	ft_putptr(uintptr_t ptr)
+static int	ft_putptr(uintptr_t ptr)
 {
 	int		count;
 	char	*hex;
@@ -34,6 +34,8 @@ int	ft_print_p(va_list args)
 
 	count = 0;
 	array = va_arg(args, void *);
+	if (!array)
+		return ((int)write(1, "(nil)", 5));
 	c = (uintptr_t)array;
 	count += write(1, "0x", 2);
 	count += ft_putptr(c);

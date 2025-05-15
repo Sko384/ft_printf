@@ -11,31 +11,32 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int	ft_print_c(va_list args)
+static int	ft_print_c(va_list args)
 {
-	int		val;
-	char	c;
+	int				val;
+	unsigned char	c;
 
 	val = va_arg(args, int);
 	c = (char)val;
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }
 
-int	ft_print_per(char per)
+static int	ft_print_per(char per)
 {
-	write(1, &per, 1);
-	return (1);
+	return (write(1, &per, 1));
 }
 
-int	ft_print_s(va_list args)
+static int	ft_print_s(va_list args)
 {
 	char	*val;
 	int		count;
 
 	count = 0;
 	val = va_arg(args, char *);
+	if (!val)
+		return (write(1, "(null)", 6));
 	while (val[count])
 	{
 		write(1, &val[count], 1);
@@ -44,7 +45,7 @@ int	ft_print_s(va_list args)
 	return (count);
 }
 
-int	ft_conversions(const char c, va_list args)
+static int	ft_conversions(const char c, va_list args)
 {
 	int	word_count;
 
@@ -82,12 +83,12 @@ int	ft_printf(const char *format, ...)
 		if (format[i] != '%')
 		{
 			write(1, &format[i], 1);
+			count++;
 			i++;
 		}
-		else
+		else if (format[i] == '%' && format[i + 1])
 		{
-			if (format[i + 1])
-				count = ft_conversions(format[++i], args);
+			count += ft_conversions(format[++i], args);
 			i++;
 		}
 	}
@@ -101,17 +102,20 @@ int	ft_printf(const char *format, ...)
 // int	main(void)
 // {
 // 	int				count;
+// 	int				count_t;
 // 	int				d;
 // 	unsigned int	ui;
 // 	char			c[] = "wow wow";
 
 // 	d = 12345;
 // 	ui = -1;
-// 	ft_printf("abcde%c%s%p %d %i\n", 'F', "what?", c, -0, 12345);
-// 	count = ft_printf("%d\n", d);
-// 	printf("文字数：%d\n", count);
-// 	ft_printf("%u\n", ui);
-// 	printf("%u\n", ui);
+// 	// ft_printf("abcde%c%s%p %d %i\n", 'F', "what?\n", c, -0, 12345);
+// 	count = ft_printf(" %c %c %c \n", '0', 0, '1');
+// 	count_t = printf(" %c %c %c \n", '0', 0, '1');
+// 	printf("\n文字数：%d\n", count);
+// 	printf("文字数：%d\n", count_t);
+// 	// ft_printf("%c\n", '0');
+// 	// printf("%c\n", '0');
 // 	return (0);
 // }
 

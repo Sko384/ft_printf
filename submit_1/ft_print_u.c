@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_putunbr(unsigned int nbr)
+static int	ft_putunbr(unsigned int nbr)
 {
 	int	count;
 

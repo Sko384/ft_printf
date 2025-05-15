@@ -10,19 +10,19 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:= printf.a
+NAME		:= libftprintf.a
 CC 			:= cc
 CFLAGS		:= -Wall -Wextra -Werror
 RM			:= rm -f
-SRCS	:= ft_printf.c ft_print_u.c ft_print_p.c ft_print_d.c
+SRCS	:= ft_printf.c ft_print_u.c ft_print_p.c ft_print_d.c ft_print_x.c
 OBJS	:= $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME):$(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c
+%.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
