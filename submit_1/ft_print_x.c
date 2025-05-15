@@ -12,25 +12,30 @@
 
 #include "ft_printf.h"
 
-int	ft_putnbr_base(unsigned int nbr)
+int	ft_putnbr_base(unsigned int nbr, const char c, char *base,
+		unsigned int base_len)
 {
-	int	count;
+	int		count;
+	char	ch;
 
 	count = 0;
-	if (nbr >= 10)
-		count = ft_putunbr(nbr / 10);
-	nbr = nbr % 10 + '0';
-	write(1, &nbr, 1);
-	count++;
-	return (count);
+	if (nbr >= base_len)
+		count = ft_putnbr_base(nbr / base_len, c, base, base_len);
+	nbr = nbr % base_len + '0';
+	if (c == 'X')
+		ch = base[nbr % base_len];
+	else
+		ch = base[nbr % base_len];
+	write(1, &ch, 1);
+	return (count + 1);
 }
 
-int	ft_print_x(va_list args)
+int	ft_print_x(va_list args, const char c, char *base, unsigned int base_len)
 {
 	unsigned int	nbr;
 	int				count;
 
 	nbr = va_arg(args, unsigned int);
-	count = ft_putnbr_base(nbr);
+	count = ft_putnbr_base(nbr, c, base, base_len);
 	return (count);
 }

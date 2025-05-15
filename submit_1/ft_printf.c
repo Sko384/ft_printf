@@ -61,8 +61,10 @@ int	ft_conversions(const char c, va_list args)
 		word_count = (ft_print_d(args));
 	else if (c == 'u')
 		word_count = (ft_print_u(args));
-	else if (c == 'x' || c == 'X')
-		word_count = (ft_print_x(args));
+	else if (c == 'x')
+		word_count = (ft_print_x(args, c, "0123456789abcdef", 16));
+	else if (c == 'X')
+		word_count = (ft_print_x(args, c, "0123456789ABCDEF", 16));
 	return (word_count);
 }
 
@@ -93,25 +95,25 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-#include <limits.h>
-#include <stdio.h>
+// #include <limits.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	int				count;
-	int				d;
-	unsigned int	ui;
-	char			c[] = "wow wow";
+// int	main(void)
+// {
+// 	int				count;
+// 	int				d;
+// 	unsigned int	ui;
+// 	char			c[] = "wow wow";
 
-	d = 12345;
-	ui = -1;
-	ft_printf("abcde%c%s%p %d %i\n", 'F', "what?", c, -0, 12345);
-	count = ft_printf("%d\n", d);
-	printf("文字数：%d\n", count);
-	ft_printf("%u\n", ui);
-	printf("%u\n", ui);
-	return (0);
-}
+// 	d = 12345;
+// 	ui = -1;
+// 	ft_printf("abcde%c%s%p %d %i\n", 'F', "what?", c, -0, 12345);
+// 	count = ft_printf("%d\n", d);
+// 	printf("文字数：%d\n", count);
+// 	ft_printf("%u\n", ui);
+// 	printf("%u\n", ui);
+// 	return (0);
+// }
 
 // void	print_section(const char *title)
 // {
